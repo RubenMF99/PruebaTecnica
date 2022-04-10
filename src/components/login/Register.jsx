@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 const Register = ()=> {
+    //state de registro
     const [registrarU,setregistrar] = useState({
         nombre:"",
         email:"",
-        password:""
+        password:"",
+        repeatPassword:""
     });
-
-    const {nombre,email,password} = registrarU
+    const {nombre,email,password,repeatPassword} = registrarU;
 
     const handleChange = e =>{
         setregistrar({
@@ -20,13 +21,46 @@ const Register = ()=> {
 
     const handleSubmitForm = e =>{
         e.preventDefault();
-        if(nombre.trim() === "" || email.trim() === "" || password.trim() === ""){
+        if(nombre.trim() === "" || email.trim() === "" || password.trim() === "" || 
+        repeatPassword.trim()===""){
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Todos los campos son obligatorios',
               });
             return;
+        }
+        if(password !== repeatPassword){
+            Swal.fire({
+                icon: 'alert',
+                title: 'Oops...',
+                text: 'Las contraseñas deben ser iguales',
+              });
+            return;
+        }
+        const data = new FormData();
+        data.append("name",nombre);
+        data.append("email",email);
+        data.append("password",password);
+        data.append("password_confirmation",repeatPassword);
+        //registrando usuario
+       // register_user(data);
+        //reseteamos el forma
+        setregistrar({
+            nombre:"",
+            email:"",
+            password:"",
+            repeatPassword:""
+        });
+    }
+
+    const register_user = async (data) => {
+        try{
+        const url =`${process.env.REACT_APP_RUTA}/api/auth/register`;
+        const response = await axios.post(url,data,{header:{'Content-Type':'multipart/form-data'}});
+        console.log("Registro: ",response);
+        }catch(error){
+            console.log(error);
         }
     }
 
@@ -50,6 +84,7 @@ const Register = ()=> {
                                     className="form-control "
                                     type="text"
                                     placeholder="Nombre"
+                                    value={nombre}
                                     onChange={handleChange}
                                 />
                             </div>       
@@ -59,6 +94,7 @@ const Register = ()=> {
                                         className="form-control"
                                         type="email"
                                         placeholder="Email" 
+                                        value={email}
                                         onChange={handleChange}
                                     />
                                 </div> 
@@ -68,16 +104,19 @@ const Register = ()=> {
                                         className="form-control"
                                         type="password"
                                         placeholder="Password"
+                                        value={password}
                                         maxLength="6" 
                                         onChange={handleChange}
                                     />
                                 </div>
                                 <div className="col-md-7  m-4">
                                     <input
+                                        name="repeatPassword"
                                         className="form-control"
                                         type="password"
                                         placeholder="Repetir password"
                                         maxLength="6" 
+                                        value={repeatPassword}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -85,9 +124,9 @@ const Register = ()=> {
                                     <input
                                     type="submit"
                                     className="btn btn-primary btn-lg btn-block "
-                                    value="Iniciar"
+                                    value="Registrarse"
                                     />
-                                    <Link to="/" className=" m-lg-4 btn btn-success btn-lg btn-block ">Volver</Link>
+                                    <Link to="/" className=" m-lg-5 btn btn-success btn-lg btn-block ">Volver</Link>
                                 </div>
                                 
                         </div>
