@@ -7,6 +7,7 @@ const AuthProvider = ({children})=> {
     //state de autententicacion
     const [authUser,setAuthUser] = useState({});
     const [loading,setLoading] = useState(true);
+    const [idControl,setidControl] = useState(null);
 
     useEffect(()=>{
         const autenticarUser = async ()=>{
@@ -39,6 +40,8 @@ const AuthProvider = ({children})=> {
             value={{
                 authUser,
                 loading,
+                idControl,
+                setidControl,
                 setAuthUser
             }}
         >

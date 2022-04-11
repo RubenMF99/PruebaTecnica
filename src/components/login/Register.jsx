@@ -120,7 +120,7 @@ const Register = ()=> {
                                         onChange={handleChange}
                                     />
                                 </div>
-                                <div className="col-md-7">
+                                <div className="col-md-7 clearfix">
                                     <input
                                     type="submit"
                                     className="btn btn-primary btn-lg btn-block "
