@@ -47,8 +47,15 @@ const Sesion = ()=> {
           const response = await axios.post(`${url}/api/auth/login`,data,{header:{'Content-Type':'multipart/form-data'}});
           localStorage.setItem('token',response.data.access_token);
           setAuthUser(response.data.user);
-          if(response.data.user.id) navigate("/Viewsposts");
+          if(response.data.user.id){
+              navigate("/Viewsposts");
+            }
         }catch(error){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'El usuario o la contraseña no existen',
+              });
             console.log(error);
         }
     }
