@@ -1,5 +1,4 @@
 import React,{useState,useEffect,createContext} from 'react'
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 const AuthContext = createContext();
 
@@ -9,7 +8,6 @@ const AuthProvider = ({children})=> {
     const [authUser,setAuthUser] = useState({});
     const [loading,setLoading] = useState(true);
 
-    let navigate = useNavigate();
     useEffect(()=>{
         const autenticarUser = async ()=>{
             const token = localStorage.getItem('token');

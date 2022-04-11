@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 const Sesion = ()=> {
 
     //State de usuario
@@ -14,7 +15,7 @@ const Sesion = ()=> {
     const {email,password} = user;
     //state de autenticacion
     const {setAuthUser} = useAuth();
-
+    let navigate = useNavigate();
     const handleChange = e =>{
         setUser({
             ...user,
@@ -46,6 +47,7 @@ const Sesion = ()=> {
           const response = await axios.post(`${url}/api/auth/login`,data,{header:{'Content-Type':'multipart/form-data'}});
           localStorage.setItem('token',response.data.access_token);
           setAuthUser(response.data.user);
+          if(response.data.user.id) navigate("/Viewsposts");
         }catch(error){
             console.log(error);
         }
