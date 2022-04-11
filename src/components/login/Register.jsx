@@ -44,7 +44,7 @@ const Register = ()=> {
         data.append("password",password);
         data.append("password_confirmation",repeatPassword);
         //registrando usuario
-       // register_user(data);
+       register_user(data);
         //reseteamos el forma
         setregistrar({
             nombre:"",
@@ -105,7 +105,7 @@ const Register = ()=> {
                                         type="password"
                                         placeholder="Password"
                                         value={password}
-                                        maxLength="6" 
+                                        maxLength="10" 
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -115,7 +115,7 @@ const Register = ()=> {
                                         className="form-control"
                                         type="password"
                                         placeholder="Repetir password"
-                                        maxLength="6" 
+                                        maxLength="10" 
                                         value={repeatPassword}
                                         onChange={handleChange}
                                     />

@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import useAuth from '../../hooks/useAuth';
 const Sesion = ()=> {
 
     //State de usuario
@@ -11,6 +12,8 @@ const Sesion = ()=> {
     });
 
     const {email,password} = user;
+    //state de autenticacion
+    const {setAuthUser} = useAuth();
 
     const handleChange = e =>{
         setUser({
@@ -29,10 +32,23 @@ const Sesion = ()=> {
               });
             return;
         }
+        //autenticando usuario
+        const data = new FormData();
+        data.append('email',email);
+        data.append('password',password);
+        //consultando a la API
+        userExisted(data);
     }
 
     const userExisted = async data =>{
-        await axios.post('http://front-test.vinixcode.cloud:8000/api/auth/login',user);
+        try{
+          const url = process.env.REACT_APP_RUTA;
+          const response = await axios.post(`${url}/api/auth/login`,data,{header:{'Content-Type':'multipart/form-data'}});
+          localStorage.setItem('token',response.data.access_token);
+          setAuthUser(response.data.user);
+        }catch(error){
+            console.log(error);
+        }
     }
     return (
         <div className='container'>
@@ -63,7 +79,7 @@ const Sesion = ()=> {
                                         className="form-control"
                                         type="password"
                                         placeholder="Password"
-                                        maxLength="6" 
+                                        maxLength="10" 
                                         onChange={handleChange}
                                         value={password}
                                     />
