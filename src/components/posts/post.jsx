@@ -24,6 +24,7 @@ const Post = ({post})=>{
         <tr>
                  <td>{post.title}</td>
                  <td>{post.body}</td>
+                 <td>{post.id}</td>
                  <td>
                      <button
                       className="btn btn-danger"
@@ -34,7 +35,8 @@ const Post = ({post})=>{
                  <Button variant="primary" onClick={handleShow}>
                     Ver post
                 </Button>
-                 </td>
+                 </td>  
+
       <Modal
         show={show}
         onHide={handleClose}
@@ -53,6 +55,7 @@ const Post = ({post})=>{
           </Button>
         </Modal.Footer>
       </Modal>
+      
         </tr>
     );
 }
