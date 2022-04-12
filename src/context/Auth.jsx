@@ -13,8 +13,8 @@ const AuthProvider = ({children})=> {
         const autenticarUser = async ()=>{
             const token = localStorage.getItem('token');
             if(!token){
-                return;
                 setLoading(false);
+                return;  
             } 
 
             const config = {
