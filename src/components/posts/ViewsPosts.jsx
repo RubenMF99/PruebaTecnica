@@ -1,5 +1,6 @@
 import {useEffect,useState} from 'react'
 import {Link} from 'react-router-dom'
+
 import axios from 'axios'
 import Post from './post'
 import useAuth from '../../hooks/useAuth'
@@ -7,6 +8,8 @@ const ViewPosts = () => {
     //state de postcs
     const [posts,setPosts] = useState([]);    
     const {idControl} = useAuth();
+    
+  
     useEffect(()=>{
         const listpost =async ()=>{
              const token = localStorage.getItem('token');
@@ -50,6 +53,7 @@ const ViewPosts = () => {
                         <Link to="/Addpost" className="btn btn-block btn-primary mt-5 float-left">Agregar un Post </Link>
                 </div>
             </div>
+            
         </div>
     )
 } 

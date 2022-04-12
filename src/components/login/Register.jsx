@@ -72,8 +72,6 @@ const Register = ()=> {
                     <h2 className="title" >Registrarse</h2>
                 </div>
            </div>
-           <div className="row  justify-content-center align-items-center">
-                <div className="col-auto bg-light p-5">
                     <form
                         onSubmit={handleSubmitForm}
                     >
@@ -132,8 +130,6 @@ const Register = ()=> {
                         </div>
                     </form>
                 </div>
-           </div>
-        </div>
         </div>
     )
 }
