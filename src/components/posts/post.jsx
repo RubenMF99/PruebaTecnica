@@ -24,7 +24,6 @@ const Post = ({post})=>{
         <tr>
                  <td>{post.title}</td>
                  <td>{post.body}</td>
-                 <td>{post.id}</td>
                  <td>
                      <button
                       className="btn btn-danger"

@@ -58,7 +58,10 @@ const Register = ()=> {
         try{
         const url =`${process.env.REACT_APP_RUTA}/api/auth/register`;
         const response = await axios.post(url,data,{header:{'Content-Type':'multipart/form-data'}});
-        console.log("Registro: ",response);
+        Swal.fire({
+            icon: 'success',
+            text: 'Registro exitoso',
+          });
         }catch(error){
             console.log(error);
         }
